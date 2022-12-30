@@ -8,7 +8,7 @@ Let's discover **HunchJS in less than 5 minutes**.
 
 ## Getting Started
 
-Walk through [the tutorial](/docs/tutorial) to add HunchJS to an 11ty site that deploys to Cloudflare Pages.
+Walk through this tutorial to add HunchJS to an 11ty site that deploys to Cloudflare Pages.
 
 ## What you'll need
 
@@ -23,6 +23,8 @@ hunch
 # shorthand for
 hunch --config hunch.config.js
 ```
+
+This generates a JSON file containing the search index.
 
 ## Query the search index
 
