@@ -2,6 +2,6 @@
 sidebar_position: 2
 ---
 
-# Configure Hunch
+# Configure HunchJS
 
 TODO set up and explain the config file

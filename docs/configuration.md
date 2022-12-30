@@ -92,3 +92,9 @@ export default {
 A list of field names that should be searchable, that are not an aggregate facet.
 
 This list will *always* include the field names from `aggregations`, as well as `_content`.
+
+#### `stopWords`
+
+Hunch supports supplying a list of stop words (words that are "filtered out (i.e. stopped) before or after processing of text because they are insignificant" [Wikipedia](https://en.wikipedia.org/wiki/Stop_word)).
+
+Since stop words are entirely language and context dependent, HunchJS *does not* ship with any default stop words, but

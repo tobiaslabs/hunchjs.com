@@ -2,7 +2,7 @@ import React from 'react'
 import clsx from 'clsx'
 import styles from './styles.module.css'
 
-const FeatureList = [
+const CalloutList = [
 	{
 		title: 'Serverless Search',
 		// This is how you would add SVG images to the features.
@@ -36,7 +36,22 @@ const FeatureList = [
 	},
 ]
 
-function Feature({ Svg, title, description }) {
+const featureList = [
+	'Full text lookup',
+	'Fuzzy search',
+	'Search specific fields',
+	'Prefix search',
+	'Search suggestions',
+	'Boosting metadata properties',
+	'Ranking',
+	'Facets',
+	'Pagination',
+	'Stop-Words',
+	'Sort by metadata properties',
+	'List counts for aggregated data',
+]
+
+function Callout({ Svg, title, description }) {
 	return (
 		<div className={clsx('col col--4')}>
 			{/*<div className="text--center">*/}
@@ -52,14 +67,31 @@ function Feature({ Svg, title, description }) {
 
 export default function HomepageFeatures() {
 	return (
-		<section className={styles.features}>
-			<div className="container">
-				<div className="row">
-					{FeatureList.map((props, idx) => (
-						<Feature key={idx} {...props} />
-					))}
+		<>
+			<section className={styles.features}>
+				<div className="container">
+					<div className="row">
+						{CalloutList.map((props, idx) => (
+							<Callout key={idx} {...props} />
+						))}
+					</div>
 				</div>
-			</div>
-		</section>
+			</section>
+			<section className={styles.features}>
+				<div className="container">
+					<div className="row">
+						<div className={clsx('col col--offset-4 col--4 text--center')}>
+							<h3>All the Things</h3>
+							<p>HunchJS comes with all the modern features you would expect from search:</p>
+							<ul>
+								{featureList.map(feature => (
+									<li>✅ {feature}</li>
+								))}
+							</ul>
+						</div>
+					</div>
+				</div>
+			</section>
+		</>
 	)
 }
