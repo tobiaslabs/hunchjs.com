@@ -3,12 +3,19 @@
 .DS_Store
 
 # personal local files
-/configuration.js
-/configuration.sh
-/fiddle.js
+configuration.js
+configuration.sh
+fiddle.js
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
 
 # globbed things
-globbed-*.js
 
 # built things
 /dist
+/build
+globbed-*.js
+.docusaurus
+.cache-loader

@@ -1,43 +1,19 @@
-# My `npm init` Folder
+# hunchjs.com
 
-```sh
-mkdir my-lib
-cd my-lib
-# then
-npx degit saibotsivad/init
-npm install --save-dev bundt uvu
+Public website for [Hunch](https://github.com/saibotsivad/hunch), a search compiler.
+
+## Develop
+
+This site is built using [Docusaurus](https://docusaurus.io/), you can start it locally with:
+
+```bash
+npm run start
 ```
 
-***Before opening in WebStorm!!!***
+## Deploy
 
-You must resolve the `TODO` inside [./.idea/modules.xml](.idea/modules.xml) ***and*** rename [./.idea/TODO_REPO_NAME.iml](.idea/TODO_REPO_NAME.iml) to the project name, or WebStorm will complain. Hard.
-
-Inside the folder, do a search for:
-
-```
-TODO_
-```
-
-And go rename the things.
-
-Finally, delete everything above these dashes:
-
----
-
-# {{TODO_REPO_NAME}}
-
-{{TODO_DESCRIPTION}}
-
-## Example
-
-Describe general use example
-
-## api: `function({ param1: Type, param2: Type })`
-
-Describe api
+The site is deployed automatically using Cloudflare Pages, so once pull requests are merged to `main`, they'll deploy automatically.
 
 ## License
 
 Published and released under the [Very Open License](http://veryopenlicense.com).
-
-If you need a commercial license, [contact me here](https://davistobias.com/license?software={{TODO_REPO_NAME}}).

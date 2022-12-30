@@ -1,30 +1,27 @@
 {
-  "name": "{{TODO_REPO_NAME}}",
+  "name": "hunchjs.com",
   "version": "0.0.0",
   "description": "{{TODO_DESCRIPTION}}",
-  "type": "module",
-  "module": "dist/index.js",
-  "unpkg": "dist/index.min.js",
-  "main": "dist/index.cjs",
-  "types": "index.d.ts",
-  "exports": {
-    ".": {
-      "import": "./dist/index.js",
-      "require": "./dist/index.cjs"
-    },
-    "./package.json": "./package.json"
-  },
+  "OFF_type": "module",
   "scripts": {
-    "test": "uvu src",
-    "build": "bundt src/index.js",
-    "lint": "eslint"
+    "docusaurus": "docusaurus",
+    "start": "docusaurus start",
+    "build": "docusaurus build",
+    "swizzle": "docusaurus swizzle",
+    "deploy": "docusaurus deploy",
+    "clear": "docusaurus clear",
+    "serve": "docusaurus serve",
+    "write-translations": "docusaurus write-translations",
+    "write-heading-ids": "docusaurus write-heading-ids"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/saibotsivad/{{TODO_REPO_NAME}}.git"
+    "url": "git+https://github.com/saibotsivad/hunchjs.com.git"
   },
   "keywords": [
-    "{{TODO_KEYWORDS}}"
+    "hunch",
+    "hunchjs",
+    "search"
   ],
   "author": {
     "name": "Tobias Davis",
@@ -33,10 +30,33 @@
   },
   "license": "SEE LICENSE IN LICENSE.md",
   "bugs": {
-    "url": "https://github.com/saibotsivad/{{TODO_REPO_NAME}}/issues"
+    "url": "https://github.com/saibotsivad/hunchjs.com/issues"
   },
-  "homepage": "https://github.com/saibotsivad/{{TODO_REPO_NAME}}",
+  "homepage": "https://github.com/saibotsivad/hunchjs.com",
+  "dependencies": {
+    "@docusaurus/core": "2.2.0",
+    "@docusaurus/preset-classic": "2.2.0",
+    "@mdx-js/react": "^1.6.22",
+    "clsx": "^1.2.1",
+    "prism-react-renderer": "^1.3.5",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
+  },
   "devDependencies": {
-    "@saibotsivad/eslint-config-saibotsivad": "*"
+    "@docusaurus/module-type-aliases": "2.2.0",
+    "@saibotsivad/eslint-config-saibotsivad": "*",
+    "eslint": "^8.30.0"
+  },
+  "browserslist": {
+    "production": [
+      ">0.5%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }
