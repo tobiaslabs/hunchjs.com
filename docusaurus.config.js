@@ -6,7 +6,7 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula')
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-	title: 'Hunch',
+	title: 'HunchJS',
 	tagline: 'Compiled search for your static Markdown files.',
 	url: 'https://hunchjs.com',
 	baseUrl: '/',
@@ -26,13 +26,13 @@ const config = {
 					sidebarPath: require.resolve('./sidebars.js'),
 					// Please change this to your repo.
 					// Remove this to remove the "edit this page" links.
-					editUrl: 'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
+					// editUrl: 'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
 				},
 				blog: {
 					showReadingTime: true,
 					// Please change this to your repo.
 					// Remove this to remove the "edit this page" links.
-					editUrl: 'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
+					// editUrl: 'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
 				},
 				theme: {
 					customCss: require.resolve('./src/css/custom.css'),
@@ -46,7 +46,7 @@ const config = {
 		navbar: {
 			title: 'HunchJS',
 			logo: {
-				alt: 'Site Logo for Hunch',
+				alt: 'Site Logo for HunchJS',
 				src: 'img/logo.svg',
 			},
 			items: [
@@ -54,7 +54,7 @@ const config = {
 					type: 'doc',
 					docId: 'intro',
 					position: 'left',
-					label: 'Tutorial',
+					label: 'Documentation',
 				},
 				{ to: '/blog', label: 'Blog', position: 'left' },
 				{

@@ -4,32 +4,33 @@ import styles from './styles.module.css'
 
 const FeatureList = [
 	{
-		title: 'Easy to Use',
-		Svg: require('@site/static/img/undraw_docusaurus_mountain.svg').default,
+		title: 'Serverless Search',
+		// This is how you would add SVG images to the features.
+		// Svg: require('@site/static/img/undraw_docusaurus_mountain.svg').default,
 		description: (
 			<>
-        Docusaurus was designed from the ground up to be easily installed and
-        used to get your website up and running quickly.
+				HunchJS was designed as a true serverless search solution, no
+				persistent running services required.
 			</>
 		),
 	},
 	{
-		title: 'Focus on What Matters',
-		Svg: require('@site/static/img/undraw_docusaurus_tree.svg').default,
+		title: 'Bet on Markdown',
+		// Svg: require('@site/static/img/undraw_docusaurus_tree.svg').default,
 		description: (
 			<>
-        Docusaurus lets you focus on your docs, and we&apos;ll do the chores. Go
-        ahead and move your docs into the <code>docs</code> directory.
+				HunchJS sticks with what's been proven: Markdown files with
+				Frontmatter, for ultimate portability.
 			</>
 		),
 	},
 	{
-		title: 'Powered by React',
-		Svg: require('@site/static/img/undraw_docusaurus_react.svg').default,
+		title: 'No Surprises',
+		// Svg: require('@site/static/img/undraw_docusaurus_react.svg').default,
 		description: (
 			<>
-        Extend or customize your website layout by reusing React. Docusaurus can
-        be extended while reusing the same header and footer.
+				HunchJS is built to be plain and simple, on the belief that the
+				right simple options make software more powerful.
 			</>
 		),
 	},
@@ -38,9 +39,9 @@ const FeatureList = [
 function Feature({ Svg, title, description }) {
 	return (
 		<div className={clsx('col col--4')}>
-			<div className="text--center">
-				<Svg className={styles.featureSvg} role="img" />
-			</div>
+			{/*<div className="text--center">*/}
+			{/*	<Svg className={styles.featureSvg} role="img" />*/}
+			{/*</div>*/}
 			<div className="text--center padding-horiz--md">
 				<h3>{title}</h3>
 				<p>{description}</p>
