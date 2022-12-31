@@ -16,7 +16,7 @@ hunch -c hunch-alt.config.js
 
 The available configuration properties are:
 
-#### `aggregations`
+## `aggregations`
 
 This property is responsible for generating search facets, it is a dictionary of keys to objects containing these properties:
 
@@ -26,17 +26,17 @@ This property is responsible for generating search facets, it is a dictionary of
 
 Note that `aggregations` is passed in to ItemsJS without modification, so you can read [the ItemsJS docs](https://github.com/itemsapi/itemsjs#api) for additional details.
 
-#### `glob`
+## `glob`
 
 This is the search string used to ingest files from the input folder.
 
 Default: `**/*.md`
 
-#### `input`
+## `input`
 
 The input directory to scan for files to ingest.
 
-#### `normalizeMetadata`
+## `normalizeMetadata`
 
 An optional function which is called during ingestion prior to filtering. It is given the document metadata object, and should return the modified object.
 
@@ -53,11 +53,11 @@ export default {
 }
 ```
 
-#### `output`
+## `output`
 
 The filepath of where to write the JSON file, e.g. `./dist/hunch.json`
 
-#### `preFilter`
+## `preFilter`
 
 An optional function to filter out files by filename, before they are read. Return truthy to include the file, or falsey to exclude.
 
@@ -71,7 +71,7 @@ export default {
 }
 ```
 
-#### `processedFilter`
+## `processedFilter`
 
 An optional function to filter out files after they are fully read and processed. Return truthy to include the file, or falsey to exclude. (Occurs *after* the `normalizeMetadata` function executes.)
 
@@ -87,13 +87,13 @@ export default {
 }
 ```
 
-#### `searchableFields`
+## `searchableFields`
 
 A list of field names that should be searchable, that are not an aggregate facet.
 
 This list will *always* include the field names from `aggregations`, as well as `_content`.
 
-#### `stopWords`
+## `stopWords`
 
 Hunch supports supplying a list of stop words (words that are "filtered out (i.e. stopped) before or after processing of text because they are insignificant" [Wikipedia](https://en.wikipedia.org/wiki/Stop_word)).
 

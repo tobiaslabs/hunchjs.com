@@ -42,7 +42,7 @@ Example:
 A simple object containing the pagination information. It has the following properties:
 
 - `number: Integer` - The zero-index pagination offset.
-- `size: Integer` - The number of items returned in this page.
+- `size: Integer` - The maximum number of items that will be returned in a page.
 - `total: Integer` - The total number of pages available.
 
 Example:
