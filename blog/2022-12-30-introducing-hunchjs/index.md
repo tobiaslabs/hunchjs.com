@@ -43,7 +43,7 @@ How easy, you might wonder?
 import { readFile } from 'node:fs/promises'
 import { hunch, normalize } from 'hunch'
 const index = JSON.parse(await readFile('./index.json', 'utf8'))
-const search = hunch(index)
+const search = hunch({ index })
 export const handler = (event, context) => ({
 		statusCode: 200,
 		headers: { 'content-type': 'application/json' },
@@ -62,7 +62,7 @@ let search
 export async function onRequestGet(context) {
 	if (!search) {
 		const index = await context.env.YOUR_KV_BINDING.get('hunch_index', { type: 'json' })
-		search = hunch(index)
+		search = hunch({ index })
 	}
 	const { searchParams } = new URL(context.request.url)
 	return new Response(JSON.stringify(search(normalize(searchParams))))

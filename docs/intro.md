@@ -33,6 +33,6 @@ The environment you use will determine the specifics of loading the index (a pla
 ```js
 import { hunch } from 'hunch'
 const index = { /* the loaded index */ }
-const search = hunch(index)
+const search = hunch({ index })
 const results = search({ q: 'all your base' })
 ```
