@@ -16,15 +16,23 @@ hunch -c hunch-alt.config.js
 
 The available configuration properties are:
 
-## `aggregations`
+## `facets`
 
-This property is responsible for generating search facets, it is a dictionary of keys to objects containing these properties:
+This property is responsible for generating search facets, it is a list of metadata keys.
 
-- `title` - The human-readable name.
-- `size` - The number of items to return for this aggregation. (Default: 10)
-- `conjunction` - By default, a search with multiple inclusive facets specified will create an `AND` query. By setting this value to `false`, it becomes an `OR` query. You'll probably want to set it to `false` for things like tags/categories.
+Example:
 
-Note that `aggregations` is passed in to ItemsJS without modification, so you can read [the ItemsJS docs](https://github.com/itemsapi/itemsjs#api) for additional details.
+```js
+// hunch.config.js
+export default {
+	// ... other options, then ...
+	facets: [
+		'categories',
+		'series',
+		'tags',
+	]
+}
+```
 
 ## `glob`
 
@@ -89,9 +97,19 @@ export default {
 
 ## `searchableFields`
 
-A list of field names that should be searchable, that are not an aggregate facet.
+A list of field names that should be searchable, that are not a facet.
 
 This list will *always* include the field names from `aggregations`, as well as `_content`.
+
+Example:
+
+```js
+// hunch.config.js
+export default {
+	// ... other options, then ...
+	searchableFields: [ 'description', 'summary' ]
+}
+```
 
 ## `stopWords`
 

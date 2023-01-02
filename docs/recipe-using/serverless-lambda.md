@@ -92,7 +92,7 @@ functions:
 You can test in the browser by hitting your generated endpoint URL:
 
 ```bash
-curl https://y2je9nk7sq.execute-api.us-east-1.amazonaws.com/?q=fancy%20words&facet%5Btags%5D=cats%2c-rabbits
+curl https://y2je9nk7sq.execute-api.us-east-1.amazonaws.com/?q=fancy%20words&facets%5Btags%5D=cats%2c-rabbits
 ```
 
 To get auto-deploy on merge, we set up this GitHub Workflow (if you're already using Workflow you'll simply want to add the `deploy` step at the end):

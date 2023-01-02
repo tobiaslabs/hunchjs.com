@@ -56,7 +56,7 @@ export const handler = async event => {
 	// A sample API Gateway request would have something like:
 	// event.queryStringParameters = {
 	//     q: 'fancy words',
-	//     'facet[tags]': 'cats,-rabbits',
+	//     'facets[tags]': 'cats,-rabbits',
 	// }
 	// So we need to normalize it to a HunchQueryObject:
 	const query = normalize(event.queryStringParameters)

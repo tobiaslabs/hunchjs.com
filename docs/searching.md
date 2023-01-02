@@ -24,7 +24,7 @@ In addition to a programmatic API, Hunch offers a canonical mapping of URL query
 ```js
 import { hunch, normalize } from 'hunch'
 const search = hunch({ index: { /* the loaded compiled index */ } })
-const { searchParams } = new URL('https://site.com?q=search%20words&facet[tags]=-cats')
+const { searchParams } = new URL('https://site.com?q=search%20words&facets[tags]=-cats')
 const query = normalize(searchParams)
 const results = search(query)
 ```
@@ -83,13 +83,13 @@ Example:
 
 The query parameter combines the two by using the `-` prefix as exclusive.
 
-- Name: `facet[$KEY]` - The `$KEY` is the metadata key used to filter.
+- Name: `facets[$KEY]` - The `$KEY` is the metadata key used to filter.
 - Type: `String` - A comma seperated list of key values, where a `-` prefix indicates exclude that value.
 
 Example:
 
 ```json
-{ "facet[tags]": "cats,-dogs" }
+{ "facets[tags]": "cats,-dogs" }
 ```
 
 ---
@@ -154,62 +154,35 @@ Example:
 
 ---
 
-## Metadata Sort ([Examples](https://github.com/tobiaslabs/hunch/blob/main/test/feature/metadata-sort)) {#metadata-sort}
-
-Return results sorted by one or more metadata properties instead of the search score.
-
-### Programmatic
-
-- Name: `sort`
-- Type: `Array<String>` - The metadata key names used to sort.
-
-Example:
-
-```json
-{ "sort": [ "tag", "series" ] }
-```
-
-### Query Parameter
-
-- Name: `sort`
-- Type: `String` - Comma seperated list of keys.
-
-```json
-{ "sort": "tag,series" }
-```
-
----
-
 ## Pagination ([Examples](https://github.com/tobiaslabs/hunch/blob/main/test/feature/pagination)) {#pagination}
 
-Specify how many results to return per query. Hunch uses a page size and number:
+Specify how many results to return per query. Hunch uses a page size and offset:
 
-- Size: the number of results to include.
-- Number: the number of the page, aka the offset, as a zero-index.
+- Size: the number of results to include. *Default: `15`*
+- Offset: the number of pages to offset, as a zero-index. E.g. if there were 3 pages, the offsets would be 0, 1, and 2.
 
-
-Specify how many results with `page[size]` and a pagination offset with `page[number]`
+Specify how many results with `page[size]` and a pagination offset with `page[offset]`
 
 ### Programmatic
 
-- Name: `pageSize` and `pageNumber`
+- Name: `pageSize` and `pageOffset`
 - Type: `Integer`
 
 Example:
 
 ```json
-{ "pageSize": 4, "pageNumber": 2 }
+{ "pageSize": 4, "pageOffset": 2 }
 ```
 
 ### Query Parameter
 
-- Name: `page[size]` and `page[number]`
+- Name: `page[size]` and `page[offset]`
 - Type: `String` - Converted using `parseInt`
 
 Example:
 
 ```json
-{ "page[size]": "4", "page[number]": "2" }
+{ "page[size]": "4", "page[offset]": "2" }
 ```
 
 ---
@@ -247,6 +220,35 @@ Example:
 ## Score ([Examples](https://github.com/tobiaslabs/hunch/blob/main/test/feature/score)) {#score}
 
 The search results include a ranking value named `_score`, which is the relevance that the search engine gives to each result.
+
+---
+
+## Sort ([Examples](https://github.com/tobiaslabs/hunch/blob/main/test/feature/sort)) {#sort}
+
+Specify a function when instantiating Hunch to sort search results prior to pagination and faceting.
+
+The function is supplied with the complete list of search result items and the normalized query object, and should return the sorted list.
+
+The query normalization function will pass along the value of `sort` unchanged. There is no type defined for it, it's up to you.
+
+Example:
+
+```js
+import { hunch } from 'hunch'
+const search = hunch({
+	index: { /* the loaded compiled index */ },
+	sort: ({ items, query }) => {
+		return query.sort === 'date'
+			? items.sort((a, b) => a.published - b.published)
+			: items
+	}
+})
+const query = {
+	q: 'search words',
+	sort: 'date',
+}
+const results = search(query)
+```
 
 ---
 
