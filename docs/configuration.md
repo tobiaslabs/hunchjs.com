@@ -110,9 +110,3 @@ export default {
 	searchableFields: [ 'description', 'summary' ]
 }
 ```
-
-## `stopWords`
-
-Hunch supports supplying a list of stop words (words that are "filtered out (i.e. stopped) before or after processing of text because they are insignificant" [Wikipedia](https://en.wikipedia.org/wiki/Stop_word)).
-
-Since stop words are entirely language and context dependent, HunchJS *does not* ship with any default stop words, but

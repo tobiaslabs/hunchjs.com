@@ -110,4 +110,4 @@ Example:
 An object containing a suggested search query and a relevance score. It has the following properties:
 
 - `q: String` - The suggested query string.
-- `score: Float` - The relevance score.
+- `score: Float` - The relevance score, rounded to 3 decimal places.

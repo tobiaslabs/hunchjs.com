@@ -282,9 +282,23 @@ Example:
 
 ## Stop Words ([Examples](https://github.com/tobiaslabs/hunch/blob/main/test/feature/stop-words)) {#stop-words}
 
-As part of the index generation, Hunch supports supplying a list of stop words (words that are "filtered out (i.e. stopped) before or after processing of text because they are insignificant" [–Wikipedia](https://en.wikipedia.org/wiki/Stop_word)).
+Stop words are words that are "filtered out (i.e. stopped) before or after processing of text because they are insignificant" ([Wikipedia](https://en.wikipedia.org/wiki/Stop_word)).
 
-Since stop words are entirely language and context dependent, HunchJS *does not* ship with any default stop words, but you instead supply them [in configuration](./configuration.md).
+Since stop words are entirely language and context dependent, HunchJS *does not* ship with any default stop words, but you instead supply them as an array of strings (or a [`Set`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set)) as part of instance creation.
+
+Example:
+
+```js
+import { hunch } from 'hunch'
+const search = hunch({
+	index: { /* the loaded compiled index */ },
+	stopWords: [ 'and', 'or', 'to', 'in', 'the' ],
+})
+const query = {
+	q: 'search words',
+}
+const results = search(query)
+```
 
 ---
 
