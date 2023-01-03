@@ -154,7 +154,30 @@ Example:
 
 ---
 
-## List Metadata ([Examples](https://github.com/tobiaslabs/hunch/blob/main/test/feature/list-metadata)) {#list-metadata}
+## Get Facets ([Examples](https://github.com/tobiaslabs/hunch/blob/main/test/feature/get-facets)) {#get-facets}
+
+Retrieve the full facets map by not setting a query parameter.
+
+This effectively gives you the entire data set, so you'll get up to a full page of results back, with the facet map filled for all data.
+
+You can specify the page size as `0` if you want *no* items returned, but this is not required.
+
+### Programmatic
+
+Example:
+
+```json
+{ "pageSize": 0 }
+```
+
+### Query Parameter
+
+Example:
+
+```json
+{ "page[size]": 0 }
+```
+
 ---
 
 ## Pagination ([Examples](https://github.com/tobiaslabs/hunch/blob/main/test/feature/pagination)) {#pagination}

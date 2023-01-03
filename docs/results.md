@@ -43,9 +43,10 @@ Example:
 
 A simple object containing the pagination information. It has the following properties:
 
+- `items: Integer` - The total number of items found, outside of pagination.
 - `offset: Integer` - The zero-index pagination offset, e.g. from the search request.
+- `pages: Integer` - The total number of pages available.
 - `size: Integer` - The page size, either from the search request or the internal default.
-- `total: Integer` - The total number of pages available.
 
 Example:
 
