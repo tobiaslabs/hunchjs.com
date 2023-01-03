@@ -110,3 +110,19 @@ export default {
 	searchableFields: [ 'description', 'summary' ]
 }
 ```
+
+## `storedFields` ([Examples](https://github.com/tobiaslabs/hunch/blob/main/test/feature/stored-fields)) {#stored-fields}
+
+A list of field names that are not searchable or faceted, but will be saved and returned with the search results.
+
+By default Hunch will only store the facets and searchable fields. If you want additional metadata available on search results, you will need to specify it.
+
+Example:
+
+```js
+// hunch.config.js
+export default {
+	// ... other options, then ...
+	storedFields: [ 'published', 'podcastId' ]
+}
+```

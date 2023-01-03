@@ -154,6 +154,9 @@ Example:
 
 ---
 
+## List Metadata ([Examples](https://github.com/tobiaslabs/hunch/blob/main/test/feature/list-metadata)) {#list-metadata}
+---
+
 ## Pagination ([Examples](https://github.com/tobiaslabs/hunch/blob/main/test/feature/pagination)) {#pagination}
 
 Specify how many results to return per query. Hunch uses a page size and offset:
