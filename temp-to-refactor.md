@@ -12,7 +12,7 @@ The steps of processing are as follows:
 
 ## Pre-Processing
 
-Under the covers, Hunch makes use of [UnifiedJS](https://unifiedjs.com/) to process the content files into an AST (Abstract State Tree) to be able to generate a search index construction. This means you can configure SearchMD' pre-processing using plugins/extensions in the [syntax-tree](https://github.com/syntax-tree/mdast-util-gfm) ecosystem.
+Under the covers, Hunch makes use of [UnifiedJS](https://unifiedjs.com/) to process the content files into an AST (Abstract State Tree) to be able to generate a search index construction. This means you can configure HunchJS pre-processing using plugins/extensions in the [syntax-tree](https://github.com/syntax-tree/mdast-util-gfm) ecosystem.
 
 For example, adding support for GitHub flavored Markdown is as easy as:
 
