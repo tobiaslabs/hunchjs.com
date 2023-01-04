@@ -99,7 +99,7 @@ export default {
 
 A list of field names that should be searchable, that are not a facet.
 
-This list will *always* include the field names from `aggregations`, as well as `_content`.
+This list will *always* include the Markdown file content blocks.
 
 Example:
 
@@ -108,6 +108,22 @@ Example:
 export default {
 	// ... other options, then ...
 	searchableFields: [ 'description', 'summary' ]
+}
+```
+
+## `stopWords` ([Examples](https://github.com/tobiaslabs/hunch/blob/main/test/feature/stop-words)) {#stop-words}
+
+Stop words are words that are "filtered out (i.e. stopped) before or after processing of text because they are insignificant" ([Wikipedia](https://en.wikipedia.org/wiki/Stop_word)).
+
+Since stop words are entirely language and context dependent, HunchJS *does not* ship with any default stop words, but you instead supply them as an array of strings.
+
+Example:
+
+```js
+// hunch.config.js
+export default {
+	// ... other options, then ...
+	stopWords: [ 'and', 'or', 'to', 'in', 'the' ],
 }
 ```
 

@@ -59,6 +59,54 @@ Example:
 
 ------
 
+## By ID ([Examples](https://github.com/tobiaslabs/hunch/blob/main/test/feature/by-id)) {#by-id}
+
+Fetch a single item by the `_id`, which is the filename.
+
+:::info
+
+All other search parameters are ignored when this one is set.
+
+The output from Hunch is different for a request by ID (see the [search results](./results.md#by-id) docs for details).
+
+:::
+
+Example:
+
+```json
+{
+	"item": {
+		"_id": "posts/2023-01-03-cool-cats.md",
+		"title": "My Cool Cats",
+		"_chunks": [
+			{ "content": "Many words about cats." }
+		]
+	}
+}
+```
+
+### Programmatic
+
+- Name: `id`
+- Type: `String` - The identifier of the item to return.
+
+Example:
+
+```json
+{ "id": "posts/2023-01-03-cool-cats.md" }
+```
+
+### Query Parameter
+
+- Name: `id`
+- Type: `String` - The identifier of the item to return.
+
+```json
+{ "id": "posts/2023-01-03-cool-cats.md" }
+```
+
+------
+
 ## Facet ([Examples](https://github.com/tobiaslabs/hunch/blob/main/test/feature/facet)) {#facet}
 
 Filter by content metadata values, e.g. filter by content containing a `tag` property with `cats` and not `dogs`.
@@ -189,6 +237,21 @@ Specify how many results to return per query. Hunch uses a page size and offset:
 
 Specify how many results with `page[size]` and a pagination offset with `page[offset]`
 
+### `maxPageSize`
+
+To limit the maximum page size (e.g. to prevent `page[size]=Infinity` attacks) you can pass in a limit as `maxPageSize` on instantiation.
+
+Default: `100`
+
+```js
+import { hunch } from 'hunch'
+const search = hunch({
+	index: { /* the loaded compiled index */ },
+	maxPageSize: 25,
+})
+// ...
+```
+
 ### Programmatic
 
 - Name: `pageSize` and `pageOffset`
@@ -282,6 +345,14 @@ const results = search(query)
 
 Limit the text query to one or more metadata properties. (Hunch defaults to searching every field configured as searchable.)
 
+:::caution
+Specifying any field overrides the default entirely, which means you need to specify *all* fields if you specify *any*.
+:::
+
+:::info
+To specify the main content field, use `content`.
+:::
+
 ### Programmatic
 
 - Name: `fields`
@@ -306,37 +377,17 @@ Example:
 
 ---
 
-## Stop Words ([Examples](https://github.com/tobiaslabs/hunch/blob/main/test/feature/stop-words)) {#stop-words}
-
-Stop words are words that are "filtered out (i.e. stopped) before or after processing of text because they are insignificant" ([Wikipedia](https://en.wikipedia.org/wiki/Stop_word)).
-
-Since stop words are entirely language and context dependent, HunchJS *does not* ship with any default stop words, but you instead supply them as an array of strings (or a [`Set`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set)) as part of instance creation.
-
-Example:
-
-```js
-import { hunch } from 'hunch'
-const search = hunch({
-	index: { /* the loaded compiled index */ },
-	stopWords: [ 'and', 'or', 'to', 'in', 'the' ],
-})
-const query = {
-	q: 'search words',
-}
-const results = search(query)
-```
-
----
-
 ## Suggest ([Examples](https://github.com/tobiaslabs/hunch/blob/main/test/feature/suggest)) {#suggest}
 
 Instead of search results, Hunch can give you back suggested search strings based on your indexed data.
 
 For example, the query text `arch` might suggest `archery sport` and `march madness` as better search queries.
 
-:::caution
+:::info
+The output from Hunch is different for a suggestion (see the [search results](./results.md#suggestion) docs for details). The output looks like this:
+:::
 
-The output from Hunch is different for a suggestion (see the [search results](./results.md) docs for details). The output looks like this:
+Example:
 
 ```json
 {
@@ -346,8 +397,6 @@ The output from Hunch is different for a suggestion (see the [search results](./
 	]
 }
 ```
-
-:::
 
 ### Programmatic
 
