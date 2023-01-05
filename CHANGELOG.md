@@ -26,6 +26,6 @@ Change categories are:
 ### Added
 - Created the base project from [saibotsivad/init](https://github.com/saibotsivad/init).
 
-[Unreleased]: https://github.com/saibotsivad/hunchjs.com/compare/v0.0.0...HEAD
-[0.0.1]: https://github.com/saibotsivad/hunchjs.com/compare/v0.0.0...v0.0.1
-[0.0.0]: https://github.com/saibotsivad/hunchjs.com/tree/v0.0.0
+[Unreleased]: https://github.com/tobiaslabs/hunchjs.com/compare/v0.0.0...HEAD
+[0.0.1]: https://github.com/tobiaslabs/hunchjs.com/compare/v0.0.0...v0.0.1
+[0.0.0]: https://github.com/tobiaslabs/hunchjs.com/tree/v0.0.0

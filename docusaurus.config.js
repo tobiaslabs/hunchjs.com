@@ -58,7 +58,7 @@ const config = {
 				},
 				{ to: '/blog', label: 'Blog', position: 'left' },
 				{
-					href: 'https://github.com/saibotsivad/hunch',
+					href: 'https://github.com/tobiaslabs/hunch',
 					label: 'GitHub',
 					position: 'right',
 				},
@@ -98,7 +98,7 @@ const config = {
 						},
 						{
 							label: 'GitHub',
-							href: 'https://github.com/saibotsivad/hunch',
+							href: 'https://github.com/tobiaslabs/hunch',
 						},
 					],
 				},

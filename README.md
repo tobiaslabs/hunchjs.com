@@ -1,6 +1,6 @@
 # hunchjs.com
 
-Public website for [HunchJS](https://github.com/saibotsivad/hunch) (aka `npm install hunch`), a search compiler.
+Public website for [HunchJS](https://github.com/tobiaslabs/hunch) (aka `npm install hunch`), a search compiler.
 
 ## Develop
 
