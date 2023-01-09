@@ -46,7 +46,10 @@ The input directory to scan for files to ingest.
 
 ## `normalizeMetadata`
 
-An optional function which is called during ingestion prior to filtering. It is given the document metadata object, and should return the modified object.
+An optional function which is called during ingestion prior to filtering, it must return the modified object and may be synchronous or asynchronous. It is called with an object containing the following properties:
+
+* `metadata` <`Object`> - The object resulting from parsing the frontmatter as YAML.
+* `blocks` <`Array`<[`Block`](https://github.com/saibotsivad/blockdown#blocks-arrayobject)>> - The pre-parsed content blocks, as [Blockdown](https://github.com/saibotsivad/blockdown) blocks. (Markdown sites commonly only have one content block.)
 
 Example:
 
@@ -54,8 +57,9 @@ Example:
 // hunch.config.js
 export default {
 	// ... other options, then ...
-	normalizeMetadata: metadata => {
+	normalizeMetadata: ({ metadata, blocks }) => {
 		if (typeof metadata.tags === 'string') metadata.tags = metadata.tags.split(';')
+		metadata.wordCount = yourWordCountAlgorithm(blocks)
 		return metadata
 	}
 }
@@ -81,7 +85,7 @@ export default {
 
 ## `processedFilter`
 
-An optional function to filter out files after they are fully read and processed. Return truthy to include the file, or falsey to exclude. (Occurs *after* the `normalizeMetadata` function executes.)
+An optional function to filter out files after they are fully read and processed. Return truthy to include the file, or falsey to exclude. Occurs *after* the `normalizeMetadata` function executes. May be asynchronous.
 
 Default: excludes documents where `published` is exactly `false` or is a date that is in the future.
 
