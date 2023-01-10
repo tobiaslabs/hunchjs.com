@@ -312,6 +312,42 @@ The search results include a ranking value named `_score`, which is the relevanc
 
 ---
 
+## Snippet ([Examples](https://github.com/tobiaslabs/hunch/blob/main/test/feature/snippet)) {#snippet}
+
+Specify how much context to include around the found query text.
+
+:::caution
+In version `0.2` of Hunch, this implementation is not particularly context-aware: the number you provide is up to the number of characters at the search term to include, so it doesn't start or end at word boundaries. Future versions of Hunch are planned to be more context aware.
+:::
+
+:::info
+To specify the main content field, use `content` as the metadata key.
+:::
+
+### Programmatic
+
+- Name: `snippet`
+- Type: `Object<String,Number>` - The key is the metadata key, the number is the maximum number of characters to include near the query term.
+
+Example:
+
+```json
+{ "snippet": { "title": 50, "content": 120 } }
+```
+
+### Query Parameter
+
+- Name: `snippet[$KEY]` - The `$KEY` is the metadata key.
+- Type: `String` - The number is the maximum number of characters to include. Converted to a number using `parseInt`.
+
+Example:
+
+```json
+{ "snippet[title]": "50", "snippet[content]": "120" }
+```
+
+---
+
 ## Sort ([Examples](https://github.com/tobiaslabs/hunch/blob/main/test/feature/sort)) {#sort}
 
 Specify a function when instantiating Hunch to sort search results prior to pagination and faceting.

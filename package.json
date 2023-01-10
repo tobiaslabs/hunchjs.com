@@ -1,8 +1,7 @@
 {
   "name": "hunchjs.com",
   "version": "0.0.0",
-  "description": "{{TODO_DESCRIPTION}}",
-  "OFF_type": "module",
+  "description": "Public website for HunchJS.",
   "scripts": {
     "docusaurus": "docusaurus",
     "start": "docusaurus start",
