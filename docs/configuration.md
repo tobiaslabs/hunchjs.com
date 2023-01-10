@@ -49,7 +49,9 @@ The input directory to scan for files to ingest.
 An optional function which is called during ingestion prior to filtering, it must return the modified object and may be synchronous or asynchronous. It is called with an object containing the following properties:
 
 * `metadata` <`Object`> - The object resulting from parsing the frontmatter as YAML.
-* `blocks` <`Array`<[`Block`](https://github.com/saibotsivad/blockdown#blocks-arrayobject)>> - The pre-parsed content blocks, as [Blockdown](https://github.com/saibotsivad/blockdown) blocks. (Markdown sites commonly only have one content block.)
+* `blocks` <`Array`<[`Block`][blockarray]>> - The pre-parsed content blocks, as [Blockdown](https://github.com/saibotsivad/blockdown) blocks. (Markdown sites commonly only have one content block.)
+
+[blockarray]: https://github.com/saibotsivad/blockdown#blocks-arrayobject
 
 Example:
 
