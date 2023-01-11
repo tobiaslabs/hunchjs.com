@@ -1,6 +1,6 @@
 ---
 sidebar_position: 5
-toc_max_heading_level: 2
+toc_max_heading_level: 3
 ---
 
 # Searching
@@ -19,23 +19,50 @@ const query = {
 const results = search(query)
 ```
 
-In addition to a programmatic API, Hunch offers a canonical mapping of URL query parameters to Hunch search parameters. This is entirely optional, and is available as the `normalize` function, as in this equivalent search:
+## Helper Utilities
+
+In addition to a programmatic API, Hunch offers a canonical mapping of URL query parameters to Hunch search parameters.
+
+:::info
+These helpers are entirely optional, you can make your own mapping of URL query parameters to Hunch, if you want!
+:::
+
+### Query Object to Hunch Search
+
+To convert a query object or [URLSearchParams](https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams) object into a HunchJS search object, import the `fromQuery` function:
 
 ```js
-import { hunch, normalize } from 'hunch'
-const search = hunch({ index: { /* the loaded compiled index */ } })
+// Either from hunch directly
+import { fromQuery } from 'hunch'
+// Or as its own import
+import { fromQuery } from 'hunch/from-query'
 const { searchParams } = new URL('https://site.com?q=search%20words&facets[tags]=-cats')
-const query = normalize(searchParams)
-const results = search(query)
+const query = fromQuery(searchParams)
+// => { q: 'search words', facetExclude: { tags: [ 'cats' ] } }
 ```
+
+### Hunch Search to Query String
+
+To convert a HunchJS search object into a query string (no leading `?` character), import the `toQuery` function:
+
+```js
+// Either from hunch directly
+import { toQuery } from 'hunch'
+// Or as its own import
+import { toQuery } from 'hunch/to-query'
+const query = toQuery({ q: 'search words', facetExclude: { tags: [ 'cats' ] } })
+// => facets[tags]=-cats&q=search%20words
+```
+
+## Search Parameters
 
 Hunch supports the following features:
 
-## Boost ([Examples](https://github.com/tobiaslabs/hunch/blob/main/test/feature/boost)) {#boost}
+### Boost ([Examples](https://github.com/tobiaslabs/hunch/blob/main/test/feature/boost)) {#boost}
 
 Boost the ranking value of some metadata properties.
 
-### Programmatic
+#### Programmatic
 
 - Name: `boost`
 - Type: `Object<String,Number>` - The key is the metadata key, the number is the amount to boost.
@@ -46,7 +73,7 @@ Example:
 { "boost": { "title": 2, "summary": 3 } }
 ```
 
-### Query Parameter
+#### Query Parameter
 
 - Name: `boost[$KEY]` - The `$KEY` is the metadata key to boost.
 - Type: `String` - The number is the amount to boost. Converted to a number using `parseInt`.
@@ -59,7 +86,7 @@ Example:
 
 ------
 
-## By ID ([Examples](https://github.com/tobiaslabs/hunch/blob/main/test/feature/by-id)) {#by-id}
+### By ID ([Examples](https://github.com/tobiaslabs/hunch/blob/main/test/feature/by-id)) {#by-id}
 
 Fetch a single item by the `_id`, which is the filename.
 
@@ -85,7 +112,7 @@ Example:
 }
 ```
 
-### Programmatic
+#### Programmatic
 
 - Name: `id`
 - Type: `String` - The identifier of the item to return.
@@ -96,7 +123,7 @@ Example:
 { "id": "posts/2023-01-03-cool-cats.md" }
 ```
 
-### Query Parameter
+#### Query Parameter
 
 - Name: `id`
 - Type: `String` - The identifier of the item to return.
@@ -107,11 +134,11 @@ Example:
 
 ------
 
-## Facet ([Examples](https://github.com/tobiaslabs/hunch/blob/main/test/feature/facet)) {#facet}
+### Facet ([Examples](https://github.com/tobiaslabs/hunch/blob/main/test/feature/facet)) {#facet}
 
 Filter by content metadata values, e.g. filter by content containing a `tag` property with `cats` and not `dogs`.
 
-### Programmatic
+#### Programmatic
 
 There are two properties, one for inclusive (the content must include it), the other for excluding (the content must *not* include it).
 
@@ -127,7 +154,7 @@ Example:
 }
 ```
 
-### Query Parameter
+#### Query Parameter
 
 The query parameter combines the two by using the `-` prefix as exclusive.
 
@@ -142,11 +169,11 @@ Example:
 
 ---
 
-## Full Text Lookup ([Examples](https://github.com/tobiaslabs/hunch/blob/main/test/feature/full-text-lookup)) {#full-text-lookup}
+### Full Text Lookup ([Examples](https://github.com/tobiaslabs/hunch/blob/main/test/feature/full-text-lookup)) {#full-text-lookup}
 
 Find records with the exact words.
 
-### Query Parameter
+#### Query Parameter
 
 - Name: `q`
 - Type: `String`
@@ -157,7 +184,7 @@ Example:
 { "q": "exact words" }
 ```
 
-### Programmatic
+#### Programmatic
 
 Example:
 
@@ -172,13 +199,13 @@ Example:
 
 ---
 
-## Fuzzy Search ([Examples](https://github.com/tobiaslabs/hunch/blob/main/test/feature/fuzzy-search)) {#fuzzy-search}
+### Fuzzy Search ([Examples](https://github.com/tobiaslabs/hunch/blob/main/test/feature/fuzzy-search)) {#fuzzy-search}
 
 Specify a fuzziness to the text query, to find records with misspelled or similar words. The fuzziness value must be positive and greater than `0`.
 
 E.g. to find `cats` and `kats` you might use `q=cats&fuzzy=0.8`
 
-### Programmatic
+#### Programmatic
 
 - Name: `fuzzy`
 - Type: `Float`
@@ -189,7 +216,7 @@ Example:
 { "fuzzy": 0.8 }
 ```
 
-### Query Parameter
+#### Query Parameter
 
 - Name: `fuzzy`
 - Type: `String` - Converted to a float using `parseFloat`.
@@ -202,7 +229,7 @@ Example:
 
 ---
 
-## Get Facets ([Examples](https://github.com/tobiaslabs/hunch/blob/main/test/feature/get-facets)) {#get-facets}
+### Get Facets ([Examples](https://github.com/tobiaslabs/hunch/blob/main/test/feature/get-facets)) {#get-facets}
 
 Retrieve the full facets map by not setting a query parameter.
 
@@ -210,7 +237,7 @@ This effectively gives you the entire data set, so you'll get up to a full page 
 
 You can specify the page size as `0` if you want *no* items returned, but this is not required.
 
-### Programmatic
+#### Programmatic
 
 Example:
 
@@ -218,17 +245,17 @@ Example:
 { "pageSize": 0 }
 ```
 
-### Query Parameter
+#### Query Parameter
 
 Example:
 
 ```json
-{ "page[size]": 0 }
+{ "page[size]": "0" }
 ```
 
 ---
 
-## Pagination ([Examples](https://github.com/tobiaslabs/hunch/blob/main/test/feature/pagination)) {#pagination}
+### Pagination ([Examples](https://github.com/tobiaslabs/hunch/blob/main/test/feature/pagination)) {#pagination}
 
 Specify how many results to return per query. Hunch uses a page size and offset:
 
@@ -237,7 +264,7 @@ Specify how many results to return per query. Hunch uses a page size and offset:
 
 Specify how many results with `page[size]` and a pagination offset with `page[offset]`
 
-### `maxPageSize`
+#### `maxPageSize`
 
 To limit the maximum page size (e.g. to prevent `page[size]=Infinity` attacks) you can pass in a limit as `maxPageSize` on instantiation.
 
@@ -252,7 +279,7 @@ const search = hunch({
 // ...
 ```
 
-### Programmatic
+#### Programmatic
 
 - Name: `pageSize` and `pageOffset`
 - Type: `Integer`
@@ -263,7 +290,7 @@ Example:
 { "pageSize": 4, "pageOffset": 2 }
 ```
 
-### Query Parameter
+#### Query Parameter
 
 - Name: `page[size]` and `page[offset]`
 - Type: `String` - Converted using `parseInt`
@@ -276,13 +303,13 @@ Example:
 
 ---
 
-## Prefix ([Examples](https://github.com/tobiaslabs/hunch/blob/main/test/feature/prefix)) {#prefix}
+### Prefix ([Examples](https://github.com/tobiaslabs/hunch/blob/main/test/feature/prefix)) {#prefix}
 
 To find both `motorcycle` and `motocross` you might use `moto` as the query text, and specify it as a prefix.
 
 > Note: this property applies to the *whole query*, e.g. `word1 word2` will look for `word1 word2*` not `word1*` and `word2*`.
 
-### Programmatic
+#### Programmatic
 
 - Name: `prefix`
 - Type: `Boolean` - Anything truthy will be interpreted as `true`, all other values as `false`.
@@ -293,7 +320,7 @@ Example:
 { "prefix": true }
 ```
 
-### Query Parameter
+#### Query Parameter
 
 - Name: `prefix`
 - Type: `String` - Must be exactly `true` or `false`.
@@ -306,13 +333,13 @@ Example:
 
 ---
 
-## Score ([Examples](https://github.com/tobiaslabs/hunch/blob/main/test/feature/score)) {#score}
+### Score ([Examples](https://github.com/tobiaslabs/hunch/blob/main/test/feature/score)) {#score}
 
 The search results include a ranking value named `_score`, which is the relevance that the search engine gives to each result.
 
 ---
 
-## Snippet ([Examples](https://github.com/tobiaslabs/hunch/blob/main/test/feature/snippet)) {#snippet}
+### Snippet ([Examples](https://github.com/tobiaslabs/hunch/blob/main/test/feature/snippet)) {#snippet}
 
 Specify how much context to include around the found query text.
 
@@ -324,7 +351,7 @@ In version `0.2` of Hunch, this implementation is not particularly context-aware
 To specify the main content field, use `content` as the metadata key.
 :::
 
-### Programmatic
+#### Programmatic
 
 - Name: `snippet`
 - Type: `Object<String,Number>` - The key is the metadata key, the number is the maximum number of characters to include near the query term.
@@ -335,7 +362,7 @@ Example:
 { "snippet": { "title": 50, "content": 120 } }
 ```
 
-### Query Parameter
+#### Query Parameter
 
 - Name: `snippet[$KEY]` - The `$KEY` is the metadata key.
 - Type: `String` - The number is the maximum number of characters to include. Converted to a number using `parseInt`.
@@ -348,7 +375,7 @@ Example:
 
 ---
 
-## Sort ([Examples](https://github.com/tobiaslabs/hunch/blob/main/test/feature/sort)) {#sort}
+### Sort ([Examples](https://github.com/tobiaslabs/hunch/blob/main/test/feature/sort)) {#sort}
 
 Specify a function when instantiating Hunch to sort search results prior to pagination and faceting.
 
@@ -377,7 +404,7 @@ const results = search(query)
 
 ---
 
-## Specific Fields ([Examples](https://github.com/tobiaslabs/hunch/blob/main/test/feature/specific-fields)) {#specific-fields}
+### Specific Fields ([Examples](https://github.com/tobiaslabs/hunch/blob/main/test/feature/specific-fields)) {#specific-fields}
 
 Limit the text query to one or more metadata properties. (Hunch defaults to searching every field configured as searchable.)
 
@@ -389,7 +416,7 @@ Specifying any field overrides the default entirely, which means you need to spe
 To specify the main content field, use `content`.
 :::
 
-### Programmatic
+#### Programmatic
 
 - Name: `fields`
 - Type: `Array<String>` - The list of metadata keys to search.
@@ -400,7 +427,7 @@ Example:
 { "fields": [ "title", "summary" ] }
 ```
 
-### Query Parameter
+#### Query Parameter
 
 - Name: `fields`
 - Type: `String` - Comma seperated list of metadata keys to search.
@@ -413,7 +440,7 @@ Example:
 
 ---
 
-## Suggest ([Examples](https://github.com/tobiaslabs/hunch/blob/main/test/feature/suggest)) {#suggest}
+### Suggest ([Examples](https://github.com/tobiaslabs/hunch/blob/main/test/feature/suggest)) {#suggest}
 
 Instead of search results, Hunch can give you back suggested search strings based on your indexed data.
 
@@ -434,7 +461,7 @@ Example:
 }
 ```
 
-### Programmatic
+#### Programmatic
 
 - Name: `suggest`
 - Type: `Boolean` - Anything truthy will be interpreted as `true`, all other values as `false`.
@@ -445,7 +472,7 @@ Example:
 { "suggest": true }
 ```
 
-### Query Parameter
+#### Query Parameter
 
 - Name: `suggest`
 - Type: `String` - Must be exactly `true` or `false`.
