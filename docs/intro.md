@@ -36,3 +36,9 @@ const index = { /* the loaded index */ }
 const search = hunch({ index })
 const results = search({ q: 'all your base' })
 ```
+
+## Local development
+
+Use the `--watch` flag to rebuild the index when your content files change.
+
+Use the `--serve` (or `--serve 3030` for a custom port) to launch a simple HTTP server that uses the canonical (but optional!) query parameters.

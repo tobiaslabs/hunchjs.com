@@ -23,8 +23,10 @@ const results = search(query)
 
 In addition to a programmatic API, Hunch offers a canonical mapping of URL query parameters to Hunch search parameters.
 
+Using the `--serve` (or `--serve 3030` for a custom port) flag will launch a simple HTTP server that uses these query parameters, for local development and testing.
+
 :::info
-These helpers are entirely optional, you can make your own mapping of URL query parameters to Hunch, if you want!
+These helper functions are entirely optional, you can make your own mapping of URL query parameters to Hunch, if you want!
 :::
 
 ### Query Object to Hunch Search
