@@ -335,6 +335,74 @@ Example:
 
 ---
 
+### Return Specific Fields ([Examples](https://github.com/tobiaslabs/hunch/blob/main/test/feature/return-specific-fields)) {#return-specific-fields}
+
+Limit the fields of the returned items. Hunch defaults to returning every field.
+
+:::caution
+The `_id` field will always be returned, but specifying any field overrides the default entirely, which means you need to specify *all* fields if you specify *any*.
+:::
+
+#### Programmatic
+
+- Name: `includeFields`
+- Type: `Array<String>` - The list of metadata keys to return.
+
+Example:
+
+```json
+{ "includeFields": [ "title", "summary" ] }
+```
+
+#### Query Parameter
+
+- Name: `include[fields]`
+- Type: `String` - Comma seperated list of metadata keys to return.
+
+Example:
+
+```json
+{ "include[fields]": "title,summary" }
+```
+
+---
+
+### Search Specific Fields ([Examples](https://github.com/tobiaslabs/hunch/blob/main/test/feature/search-specific-fields)) {#search-specific-fields}
+
+Limit the text query to one or more metadata properties. (Hunch defaults to searching every field configured as searchable.)
+
+:::caution
+Specifying any field overrides the default entirely, which means you need to specify *all* fields if you specify *any*.
+:::
+
+:::info
+To specify the main content field, use `content`.
+:::
+
+#### Programmatic
+
+- Name: `fields`
+- Type: `Array<String>` - The list of metadata keys to search.
+
+Example:
+
+```json
+{ "fields": [ "title", "summary" ] }
+```
+
+#### Query Parameter
+
+- Name: `fields`
+- Type: `String` - Comma seperated list of metadata keys to search.
+
+Example:
+
+```json
+{ "fields": "title,summary" }
+```
+
+---
+
 ### Score ([Examples](https://github.com/tobiaslabs/hunch/blob/main/test/feature/score)) {#score}
 
 The search results include a ranking value named `_score`, which is the relevance that the search engine gives to each result.
@@ -429,42 +497,6 @@ Example:
 
 ```json
 { "sort": "published,-modified" }
-```
-
----
-
-### Specific Fields ([Examples](https://github.com/tobiaslabs/hunch/blob/main/test/feature/specific-fields)) {#specific-fields}
-
-Limit the text query to one or more metadata properties. (Hunch defaults to searching every field configured as searchable.)
-
-:::caution
-Specifying any field overrides the default entirely, which means you need to specify *all* fields if you specify *any*.
-:::
-
-:::info
-To specify the main content field, use `content`.
-:::
-
-#### Programmatic
-
-- Name: `fields`
-- Type: `Array<String>` - The list of metadata keys to search.
-
-Example:
-
-```json
-{ "fields": [ "title", "summary" ] }
-```
-
-#### Query Parameter
-
-- Name: `fields`
-- Type: `String` - Comma seperated list of metadata keys to search.
-
-Example:
-
-```json
-{ "fields": "title,summary" }
 ```
 
 ---
