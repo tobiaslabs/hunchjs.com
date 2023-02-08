@@ -379,11 +379,11 @@ Example:
 
 ### Sort ([Examples](https://github.com/tobiaslabs/hunch/blob/main/test/feature/sort)) {#sort}
 
-Specify a function when instantiating Hunch to sort search results prior to pagination and faceting.
+Specify a list of ordered sort objects when making a query, to sort the search results prior to pagination and faceting.
 
-The function is supplied with the complete list of search result items and the normalized query object, and should return the sorted list.
+The query normalization function will turn a comma-separated list of keys into a list of sort objects.
 
-The query normalization function will pass along the value of `sort` unchanged. There is no type defined for it, it's up to you.
+Because sorting can be content-specific, you can also pass in a sort function when instantiating Hunch. The function is supplied with the complete list of search result items and the normalized query object, and should return the sorted list.
 
 Example:
 
@@ -402,6 +402,33 @@ const query = {
 	sort: 'date',
 }
 const results = search(query)
+```
+
+#### Programmatic
+
+- Name: `sort`
+- Type: `Array<{ key: String, descending: Boolean }>` - An ordered list of metadata keys to use in sorting.
+
+Example:
+
+```json
+{
+	"sort": [
+		{ "key": "published", "descending": false },
+		{ "key": "modified", "descending": true }
+	]
+}
+```
+
+#### Query Parameter
+
+- Name: `sort`
+- Type: `String` - A comma-separated list of ordered sort keys. To mark as descending, prefix with a dash (`-`).
+
+Example:
+
+```json
+{ "sort": "published,-modified" }
 ```
 
 ---
