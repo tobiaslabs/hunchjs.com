@@ -68,26 +68,42 @@ Example: this whole object is a `HunchFacets` object, containing two [`HunchFace
 ```json
 {
 	"series": {
-		"Animals": 6,
-		"Book Reviews": 3
+		"Animals": { "all": 21, "search": 6 },
+		"Book Reviews": { "all": 17, "search": 3 }
 	},
 	"tags": {
-		"cats":  3,
-		"dogs": 7
+		"cats":  { "all": 9, "search": 3 },
+		"dogs": { "all": 12, "search": 9 }
 	}
 }
 ```
 
 ### `HunchFacetValues`
 
-This is a map of unique metadata values (converted to `String`s) from a facet key, to the number of documents containing this value across all paginated results.
+This is a map of unique metadata values (converted to `String`s) from a facet key, to a [`HunchFacetValue`](#hunchfacetvalue) object.
 
 Example:
 
 ```json
 {
-	"cats":  3,
-	"dogs": 7
+	"cats":  { "all": 9, "search": 3 },
+	"dogs": { "all": 12, "search": 9 }
+}
+```
+
+### `HunchFacetValue`
+
+An object containing the number of documents containing this value across all searchable items (as `all`) and across all paginated results (as `search`). It has the following properties:
+
+- `all` <`Integer`> - The number of *all* searchable items that contain this facet value.
+- `search` <`Integer`> - The number of items in all search results, pre-pagination, that contain this facet value.
+
+Example:
+
+```json
+{
+	"all": 9,
+	"search": 3
 }
 ```
 

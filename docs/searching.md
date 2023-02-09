@@ -136,23 +136,23 @@ Example:
 
 ------
 
-### Facet ([Examples](https://github.com/tobiaslabs/hunch/blob/main/test/feature/facet)) {#facet}
+### Facet Matching ([Examples](https://github.com/tobiaslabs/hunch/blob/main/test/feature/facet-matching)) {#facet-matching}
 
-Filter by content metadata values, e.g. filter by content containing a `tag` property with `cats` and not `dogs`.
+Filter by content facet values, e.g. filter by content containing a `tag` property with `cats` and not `dogs`.
 
 #### Programmatic
 
 There are two properties, one for inclusive (the content must include it), the other for excluding (the content must *not* include it).
 
-- Name: `facetInclude` and `facetExclude`
+- Name: `facetMustMatch` and `facetMustNotMatch`
 - Type: `Object<String,Array<String>>` - The key is the metadata key to filter by, the value is a list of metadata values.
 
 Example:
 
 ```json
 {
-	"facetInclude": { "tags": [ "cats" ] },
-	"facetExclude": { "tags": [ "dogs" ] }
+	"facetMustMatch": { "tags": [ "cats" ] },
+	"facetMustNotMatch": { "tags": [ "dogs" ] }
 }
 ```
 
@@ -335,6 +335,118 @@ Example:
 
 ---
 
+### Return Specific Facets ([Examples](https://github.com/tobiaslabs/hunch/blob/main/test/feature/return-specific-facets)) {#return-specific-facets}
+
+Alter the facet map included on the results response. Hunch defaults to returning a facet map of *only* the facets found in the search results.
+
+#### Programmatic
+
+- Name: `includeFacets`
+- Type: `Array<String>` - The list of facet keys to include in the facet map.
+
+Example:
+
+```json
+{ "includeFacets": [ "title", "summary" ] }
+```
+
+:::info
+Use the `*` facet name to include all facets across all searchable items:
+
+```json
+{ "includeFacets": [ "*" ] }
+```
+:::
+
+#### Query Parameter
+
+- Name: `include[facets]`
+- Type: `String` - Comma seperated list of facet keys to include in the facet map.
+
+Example:
+
+```json
+{ "include[fields]": "title,summary" }
+```
+
+:::info
+Use the `*` facet name to include all facets across all searchable items:
+
+```json
+{ "include[fields]": "*" }
+```
+:::
+
+---
+
+### Return Specific Fields ([Examples](https://github.com/tobiaslabs/hunch/blob/main/test/feature/return-specific-fields)) {#return-specific-fields}
+
+Limit the fields of the returned result items. Hunch defaults to returning every field.
+
+:::caution
+The `_id` field will always be returned, but specifying any field overrides the default entirely, which means you need to specify *all* fields if you specify *any*.
+:::
+
+#### Programmatic
+
+- Name: `includeFields`
+- Type: `Array<String>` - The list of metadata keys to return.
+
+Example:
+
+```json
+{ "includeFields": [ "title", "summary" ] }
+```
+
+#### Query Parameter
+
+- Name: `include[fields]`
+- Type: `String` - Comma seperated list of metadata keys to return.
+
+Example:
+
+```json
+{ "include[fields]": "title,summary" }
+```
+
+---
+
+### Search Specific Fields ([Examples](https://github.com/tobiaslabs/hunch/blob/main/test/feature/search-specific-fields)) {#search-specific-fields}
+
+Limit the text query to one or more metadata properties. (Hunch defaults to searching every field configured as searchable.)
+
+:::caution
+Specifying any field overrides the default entirely, which means you need to specify *all* fields if you specify *any*.
+:::
+
+:::info
+To specify the main content field, use `content`.
+:::
+
+#### Programmatic
+
+- Name: `fields`
+- Type: `Array<String>` - The list of metadata keys to search.
+
+Example:
+
+```json
+{ "fields": [ "title", "summary" ] }
+```
+
+#### Query Parameter
+
+- Name: `fields`
+- Type: `String` - Comma seperated list of metadata keys to search.
+
+Example:
+
+```json
+{ "fields": "title,summary" }
+```
+
+---
+
 ### Score ([Examples](https://github.com/tobiaslabs/hunch/blob/main/test/feature/score)) {#score}
 
 The search results include a ranking value named `_score`, which is the relevance that the search engine gives to each result.
@@ -379,11 +491,11 @@ Example:
 
 ### Sort ([Examples](https://github.com/tobiaslabs/hunch/blob/main/test/feature/sort)) {#sort}
 
-Specify a function when instantiating Hunch to sort search results prior to pagination and faceting.
+Specify a list of ordered sort objects when making a query, to sort the search results prior to pagination and faceting.
 
-The function is supplied with the complete list of search result items and the normalized query object, and should return the sorted list.
+The query normalization function will turn a comma-separated list of keys into a list of sort objects.
 
-The query normalization function will pass along the value of `sort` unchanged. There is no type defined for it, it's up to you.
+Because sorting can be content-specific, you can also pass in a sort function when instantiating Hunch. The function is supplied with the complete list of search result items and the normalized query object, and should return the sorted list.
 
 Example:
 
@@ -404,40 +516,31 @@ const query = {
 const results = search(query)
 ```
 
----
-
-### Specific Fields ([Examples](https://github.com/tobiaslabs/hunch/blob/main/test/feature/specific-fields)) {#specific-fields}
-
-Limit the text query to one or more metadata properties. (Hunch defaults to searching every field configured as searchable.)
-
-:::caution
-Specifying any field overrides the default entirely, which means you need to specify *all* fields if you specify *any*.
-:::
-
-:::info
-To specify the main content field, use `content`.
-:::
-
 #### Programmatic
 
-- Name: `fields`
-- Type: `Array<String>` - The list of metadata keys to search.
+- Name: `sort`
+- Type: `Array<{ key: String, descending: Boolean }>` - An ordered list of metadata keys to use in sorting.
 
 Example:
 
 ```json
-{ "fields": [ "title", "summary" ] }
+{
+	"sort": [
+		{ "key": "published", "descending": false },
+		{ "key": "modified", "descending": true }
+	]
+}
 ```
 
 #### Query Parameter
 
-- Name: `fields`
-- Type: `String` - Comma seperated list of metadata keys to search.
+- Name: `sort`
+- Type: `String` - A comma-separated list of ordered sort keys. To mark as descending, prefix with a dash (`-`).
 
 Example:
 
 ```json
-{ "fields": "title,summary" }
+{ "sort": "published,-modified" }
 ```
 
 ---
