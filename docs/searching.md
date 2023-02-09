@@ -164,10 +164,10 @@ Example:
 
 #### Query Parameter
 
-The query parameter combines the two by using the `-` prefix as exclusive.
+The query parameter combines the three by using the `-` prefix as exclusive and `~` for the match-any.
 
 - Name: `facets[$KEY]` - The `$KEY` is the metadata key used to filter.
-- Type: `String` - A comma seperated list of key values, where: 1) a `-` prefix indicates exclude that value, 2) a `~` prefix indicates match any.
+- Type: `String` - A comma seperated list of key values, where: 1) a `-` prefix indicates exclude that value, 2) a `~` prefix indicates match-any.
 
 Example:
 
