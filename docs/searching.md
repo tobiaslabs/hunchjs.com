@@ -142,9 +142,14 @@ Filter by content facet values, e.g. filter by content containing a `tag` proper
 
 #### Programmatic
 
-There are two properties, one for inclusive (the content must include it), the other for excluding (the content must *not* include it).
+There are three properties for facet matching:
 
-- Name: `facetMustMatch` and `facetMustNotMatch`
+one for inclusive (the content must include it), the other for excluding (the content must *not* include it).
+
+- Names:
+  - `facetMustMatch` - The item must contain *all* specified facet key-values.
+  - `facetMustMatchAny` - The item must contain *any* of the specified facet key-values.
+  - `facetMustNotMatch` - The item must contain *none* of the specified facet key-values.
 - Type: `Object<String,Array<String>>` - The key is the metadata key to filter by, the value is a list of metadata values.
 
 Example:
@@ -152,6 +157,7 @@ Example:
 ```json
 {
 	"facetMustMatch": { "tags": [ "cats" ] },
+	"facetMustMatchAny": { "tags": [ "rabbits" ] },
 	"facetMustNotMatch": { "tags": [ "dogs" ] }
 }
 ```
@@ -161,12 +167,12 @@ Example:
 The query parameter combines the two by using the `-` prefix as exclusive.
 
 - Name: `facets[$KEY]` - The `$KEY` is the metadata key used to filter.
-- Type: `String` - A comma seperated list of key values, where a `-` prefix indicates exclude that value.
+- Type: `String` - A comma seperated list of key values, where: 1) a `-` prefix indicates exclude that value, 2) a `~` prefix indicates match any.
 
 Example:
 
 ```json
-{ "facets[tags]": "cats,-dogs" }
+{ "facets[tags]": "cats,~rabbits,-dogs" }
 ```
 
 ---
