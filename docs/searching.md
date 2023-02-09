@@ -136,23 +136,23 @@ Example:
 
 ------
 
-### Facet ([Examples](https://github.com/tobiaslabs/hunch/blob/main/test/feature/facet)) {#facet}
+### Facet Matching ([Examples](https://github.com/tobiaslabs/hunch/blob/main/test/feature/facet-matching)) {#facet-matching}
 
-Filter by content metadata values, e.g. filter by content containing a `tag` property with `cats` and not `dogs`.
+Filter by content facet values, e.g. filter by content containing a `tag` property with `cats` and not `dogs`.
 
 #### Programmatic
 
 There are two properties, one for inclusive (the content must include it), the other for excluding (the content must *not* include it).
 
-- Name: `facetInclude` and `facetExclude`
+- Name: `facetMustMatch` and `facetMustNotMatch`
 - Type: `Object<String,Array<String>>` - The key is the metadata key to filter by, the value is a list of metadata values.
 
 Example:
 
 ```json
 {
-	"facetInclude": { "tags": [ "cats" ] },
-	"facetExclude": { "tags": [ "dogs" ] }
+	"facetMustMatch": { "tags": [ "cats" ] },
+	"facetMustNotMatch": { "tags": [ "dogs" ] }
 }
 ```
 
@@ -335,9 +335,53 @@ Example:
 
 ---
 
+### Return Specific Facets ([Examples](https://github.com/tobiaslabs/hunch/blob/main/test/feature/return-specific-facets)) {#return-specific-facets}
+
+Alter the facet map included on the results response. Hunch defaults to returning a facet map of *only* the facets found in the search results.
+
+#### Programmatic
+
+- Name: `includeFacets`
+- Type: `Array<String>` - The list of facet keys to include in the facet map.
+
+Example:
+
+```json
+{ "includeFacets": [ "title", "summary" ] }
+```
+
+:::info
+Use the `*` facet name to include all facets across all searchable items:
+
+```json
+{ "includeFacets": [ "*" ] }
+```
+:::
+
+#### Query Parameter
+
+- Name: `include[facets]`
+- Type: `String` - Comma seperated list of facet keys to include in the facet map.
+
+Example:
+
+```json
+{ "include[fields]": "title,summary" }
+```
+
+:::info
+Use the `*` facet name to include all facets across all searchable items:
+
+```json
+{ "include[fields]": "*" }
+```
+:::
+
+---
+
 ### Return Specific Fields ([Examples](https://github.com/tobiaslabs/hunch/blob/main/test/feature/return-specific-fields)) {#return-specific-fields}
 
-Limit the fields of the returned items. Hunch defaults to returning every field.
+Limit the fields of the returned result items. Hunch defaults to returning every field.
 
 :::caution
 The `_id` field will always be returned, but specifying any field overrides the default entirely, which means you need to specify *all* fields if you specify *any*.
