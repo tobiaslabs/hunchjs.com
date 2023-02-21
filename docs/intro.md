@@ -42,3 +42,5 @@ const results = search({ q: 'all your base' })
 Use the `--watch` flag to rebuild the index when your content files change.
 
 Use the `--serve` (or `--serve 3030` for a custom port) to launch a simple HTTP server that uses the canonical (but optional!) query parameters.
+
+When using `--serve` you can also include `--delay N` to add `N` milliseconds of delay on the local server response. For example, `--delay 1200` will add 1.2 seconds of delay. This can be useful to see how normal network response latency will impact your user experience.

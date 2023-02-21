@@ -13,3 +13,7 @@
 .featureListItem {
 	margin-bottom: 0;
 }
+
+.noListStyle {
+	list-style: none;
+}

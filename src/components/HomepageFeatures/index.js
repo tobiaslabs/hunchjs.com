@@ -38,6 +38,7 @@ const CalloutList = [
 
 const featureList = [
 	'Full text lookup',
+	'Exact phrase matching',
 	'Fuzzy search',
 	'Search specific fields',
 	'Prefix search',
@@ -83,7 +84,7 @@ export default function HomepageFeatures() {
 						<div className={clsx('col col--offset-4 col--4 text--center')}>
 							<h3>All the Things</h3>
 							<p>HunchJS comes with all the modern features you would expect from search:</p>
-							<ul>
+							<ul className={styles.noListStyle}>
 								{featureList.map(feature => (
 									<li>✅ {feature}</li>
 								))}

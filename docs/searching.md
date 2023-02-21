@@ -60,6 +60,8 @@ const query = toQuery({ q: 'search words', facetExclude: { tags: [ 'cats' ] } })
 
 Hunch supports the following features:
 
+---
+
 ### Boost ([Examples](https://github.com/tobiaslabs/hunch/blob/main/test/feature/boost)) {#boost}
 
 Boost the ranking value of some metadata properties.
@@ -75,16 +77,23 @@ Example:
 { "boost": { "title": 2, "summary": 3 } }
 ```
 
-#### Query Parameter
+---
 
-- Name: `boost[$KEY]` - The `$KEY` is the metadata key to boost.
-- Type: `String` - The number is the amount to boost. Converted to a number using `parseInt`.
+### Exact Phrase ([Examples](https://github.com/tobiaslabs/hunch/blob/main/test/feature/exact-phrase)) {#exact-phrase}
+
+Same as the [Full Text Lookup](#full-text-lookup) but use quote marks to limit the results to an exact-phrase match.
+
+Single or double quotes work fine, you can even use both, but they need to be correctly paired.
 
 Example:
 
 ```json
-{ "boost[title]": "2", "boost[summary]": "3" }
+{ "q": "cars 'wireless chargers'" }
 ```
+
+This will return results containing the words `cars`, `wireless`, and `chargers` anywhere in searchable fields, and the phrase `wireless chargers` must exist in the field as well.
+
+Word fuzziness is not used with exact-phrase queries, but results do ignore upper/lower case differences.
 
 ------
 
