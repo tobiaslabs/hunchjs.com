@@ -21,7 +21,7 @@ For request results by ID, the `HunchItem` has `_chunks` set instead of `_chunk`
 The output from a Hunch search is an object with the following properties:
 
 - `facets` <[`HunchFacets`](#hunchfacets)>
-- `item` <`Array`<[`HunchItem`](#hunchitem)>>
+- `items` <`Array`<[`HunchItem`](#hunchitem)>>
 - `page` <[`HunchPagination`](#hunchpagination)>
 
 ## Suggestion
