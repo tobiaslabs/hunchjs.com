@@ -34,6 +34,34 @@ export default {
 }
 ```
 
+## `formatBlock`
+
+An optional asynchronous function which is given a [Blockdown](https://github.com/saibotsivad/blockdown) block, and returns a modified block. It is called with an object containing the following properties, copied from the Blockdown specifications:
+
+* `name` <`String`> - The name of the block, e.g. for `---!yaml` this property would be `yaml`.
+* `id` <`String`> - If present, the identifier for the block, e.g. for `---!yaml#abc` this property would be `abc`.
+* `metadata` <`String`> - If present, the un-parsed metadata for the block, e.g. for `---!yaml[foo]` this property would be `foo`.
+* `content` <`String`> - If present, the string content of the block. See the [Blockdown specs](https://blockdown.md/) for more details.
+
+This function should return an object with the same key-value structure, although the `metadata` property may be reformatted.
+
+Returning a falsey value will cause this block to be dropped from the searchable content.
+
+Example:
+
+```js
+// hunch.config.js
+export default {
+	// ... other options, then ...
+	formatBlock: ({ name, id, metadata, content }) => {
+		if (name !== 'markdown') return false
+		metadata = your_custom_metadata_parser(metadata)
+		content = your_custom_content_parser(content)
+		return { name, id, metadata, content }
+	}
+}
+```
+
 ## `glob`
 
 This is the search string used to ingest files from the input folder.
